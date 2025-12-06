@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="landing-shell">
+    <section class="landing-hero">
+        <div>
+            <p class="eyebrow">Hybrid Artistic Engine</p>
+            <h1>Transform photos into timeless pencil sketches.</h1>
+            <p class="lede">AI-powered precision meets the beauty of traditional art. Upload, render, and download gallery-worthy pencil outlines and shading in minutes.</p>
+            <div class="cta-row">
+                <a class="pill primary" href="{% url 'signup' %}">Try Now</a>
+                <a class="pill ghost" href="{% url 'dashboard' %}">View Gallery</a>
+            </div>
+            <div class="hero-tags">
+                <span>Upload Photo</span>
+                <span>AI Sketch Rendering</span>
+                <span>Download Masterpiece</span>
+                <span>Artist-grade Quality</span>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="split">
+                <div class="pane photo">
+                    <span class="label">Original</span>
+                </div>
+                <div class="pane sketch">
+                    <span class="label">Pencil Sketch</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="landing-panels">
+        <div class="panel-card">
+            <h3>How it works</h3>
+            <div class="how-grid">
+                <div class="how-item">
+                    <strong>Upload</strong>
+                    <span>Choose any portrait, pet, or product photo.</span>
+                </div>
+                <div class="how-item">
+                    <strong>AI Sketch</strong>
+                    <span>Trace outlines or artistic pencil rendering in seconds.</span>
+                </div>
+                <div class="how-item">
+                    <strong>Download</strong>
+                    <span>Export your sketch at the dimension you choose.</span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-card">
+            <h3>State-of-the-art technology</h3>
+            <p>Advanced edge detection and tonal modeling replicate pencil stroke intensity, pressure, and grain for authentic outlines.</p>
+        </div>
+    </section>
+
+    <section class="card">
+        <h3>Sample creations</h3>
+        <div class="sample-grid">
+            <div class="sample-card"><span>Portrait outline</span></div>
+            <div class="sample-card"><span>Pet study</span></div>
+            <div class="sample-card"><span>Architecture sketch</span></div>
+            <div class="sample-card"><span>Concept art</span></div>
+            <div class="sample-card"><span>Fashion figure</span></div>
+            <div class="sample-card"><span>Landscape</span></div>
+        </div>
+    </section>
+
+    <section class="card quote-card">
+        <blockquote>“This system draws like a human artist—it captures emotion and detail without heavy shading.”</blockquote>
+        <div class="attribution">— Hybrid Artistic Engine artist</div>
+    </section>
+
+    <section class="cta-band">
+        <h2>Bring your imagination to life.</h2>
+        <p class="lede">Start tracing or rendering pencil outlines with Hybrid Artistic Engine.</p>
+        <div class="cta-row" style="justify-content:center;">
+            <a class="pill primary" href="{% url 'signup' %}">Create account</a>
+            <a class="pill ghost" href="{% url 'login' %}">Login</a>
+        </div>
+    </section>
+</div>
+{% endblock %}

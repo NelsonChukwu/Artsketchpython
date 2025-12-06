@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid Artistic Engine</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="nav-shell">
+            <div class="brand">
+                <span class="mark">🎨</span>
+                <div class="brand-text">
+                    <span class="brand-name">Hybrid Artistic Engine</span>
+                    <span class="brand-sub">Pencil-accurate sketching suite</span>
+                </div>
+            </div>
+            <nav class="menu">
+                <a href="{% url 'landing' %}">Home</a>
+                <a href="{% url 'create' %}">Create</a>
+                <a href="{% url 'editor' %}">Editor</a>
+                <a href="{% url 'ai-enhancement' %}">AI Enhancement</a>
+                <a href="{% url 'projects' %}">Projects</a>
+                <a href="{% url 'community' %}">Community</a>
+            </nav>
+            <div class="nav-actions">
+                {% if request.user.is_authenticated and request.resolver_match.url_name != 'landing' %}
+                    <a class="pill ghost" href="{% url 'dashboard' %}">Dashboard</a>
+                    <a class="pill danger" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a class="pill ghost" href="{% url 'login' %}">Login</a>
+                    <a class="pill primary" href="{% url 'signup' %}">Sign Up</a>
+                {% endif %}
+            </div>
+        </header>
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <main class="content">
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="footer">
+            <div>Hybrid Artistic Engine · Pencil Sketch Lab</div>
+            <div class="footer-actions">
+                <span>Precision sketching</span>
+                <span>AI refinement</span>
+                <span>Community gallery</span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

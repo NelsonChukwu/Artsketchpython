@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="auth card">
+    <h2>Login</h2>
+    <p class="lede">Access your dashboard to upload and sketch.</p>
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="pill primary">Login</button>
+    </form>
+    <p class="hint">No account? <a href="{% url 'signup' %}">Sign up</a></p>
+</section>
+{% endblock %}

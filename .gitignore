@@ -1,0 +1,11 @@
+# Ignore local environment files
+.env
+# Python caches and builds
+__pycache__/
+*.py[cod]
+
+# Local database
+db.sqlite3
+
+# Uploaded media
+media/

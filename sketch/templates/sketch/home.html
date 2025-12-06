@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-text">
+        <p class="eyebrow">Pencil-accurate sketching</p>
+        <h1>Transform any image into a true pencil design</h1>
+        <p class="lede">Upload a photo, and the Hybrid Artistic Engine renders a hand-drawn pencil sketch with tonal accuracy and clean linework.</p>
+        <div class="chips">
+            <span>Realistic shading</span>
+            <span>Edge preservation</span>
+            <span>Layer-aware workflow</span>
+        </div>
+    </div>
+    <div class="hero-panel">
+        <form method="post" enctype="multipart/form-data" class="upload-card">
+            {% csrf_token %}
+            <label class="field-label" for="id_image">Upload an image</label>
+            <div class="field">
+                {{ form.image }}
+            </div>
+            <button type="submit" class="primary-btn">Generate Pencil Sketch</button>
+            <p class="hint">PNG, JPG, JPEG supported. Large images are auto-resized for precision.</p>
+        </form>
+        {% if result_url %}
+        <div class="result-card">
+            <div class="result-row">
+                {% if original_url %}
+                <div>
+                    <p class="result-title">Original</p>
+                    <img src="{{ original_url }}" alt="Original upload">
+                </div>
+                {% endif %}
+                <div>
+                    <p class="result-title">Pencil Sketch</p>
+                    <img src="{{ result_url }}" alt="Pencil sketch result">
+                </div>
+            </div>
+            <a class="ghost-btn" href="{{ result_url }}" download>Download Sketch</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="grid">
+    <div class="card">
+        <h3>AI Enhancement</h3>
+        <p>Apply shading refinement, style transfer, super-resolution upscaling, and colorization for advanced finishes.</p>
+    </div>
+    <div class="card">
+        <h3>Editor</h3>
+        <p>Work on layered canvases, mask locally, and transform elements with precision tools built for artists.</p>
+    </div>
+    <div class="card">
+        <h3>Projects & Community</h3>
+        <p>Version every iteration, autosave drafts, collaborate with peers, and share to the gallery.</p>
+    </div>
+</section>
+{% endblock %}

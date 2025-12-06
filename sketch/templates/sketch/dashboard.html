@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="dashboard">
+    <div class="dash-card">
+        <div class="dash-top">
+            <div class="dash-brand">
+                <span class="mark">🎨</span>
+                <div>
+                    <div class="title">Hybrid Artistic Engine</div>
+                    <div class="sub">Upload · Sketch · Refine</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dash-tabs">
+            <a class="tab {% if tab == 'profile' %}active{% endif %}" href="?tab=profile">Profile</a>
+            <a class="tab {% if tab == 'upload' %}active{% endif %}" href="?tab=upload">Upload & Sketch</a>
+            <a class="tab {% if tab == 'recent' %}active{% endif %}" href="?tab=recent">Recent Works</a>
+        </div>
+
+        <div class="dash-body">
+            {% if tab == 'recent' %}
+            <div class="recent-filters">
+                <form method="get" class="filter-form">
+                    <input type="hidden" name="tab" value="recent">
+                    <input type="text" name="q" placeholder="Search by name" value="{{ filters.q }}">
+                    <input type="date" name="start_date" value="{{ filters.start_date }}">
+                    <input type="date" name="end_date" value="{{ filters.end_date }}">
+                    <select name="size">
+                        <option value="orig" {% if request.GET.size == "orig" or not request.GET.size %}selected{% endif %}>Original size</option>
+                        <option value="lg" {% if request.GET.size == "lg" %}selected{% endif %}>Large (max 1600px)</option>
+                        <option value="md" {% if request.GET.size == "md" %}selected{% endif %}>Medium (max 1024px)</option>
+                        <option value="sm" {% if request.GET.size == "sm" %}selected{% endif %}>Small (max 720px)</option>
+                        <option value="xs" {% if request.GET.size == "xs" %}selected{% endif %}>Compact (max 480px)</option>
+                    </select>
+                    <button type="submit" class="pill ghost">Filter</button>
+                    <a class="pill ghost" href="?tab=recent">Clear</a>
+                </form>
+                <a class="pill primary" href="{% url 'download_all' %}?{% if request.GET %}{{ request.GET.urlencode }}{% else %}tab=recent{% endif %}">Download All</a>
+            </div>
+            <div class="recent-grid">
+                {% for work in recent %}
+                    <div class="recent-card">
+                        <div class="thumbs thumbs-single">
+                            <img src="{{ work.sketch_image.url }}" alt="Sketch">
+                        </div>
+                        <div class="meta meta-grid">
+                            <span>{{ work.created_at|date:"M d, Y" }}</span>
+                            <span class="muted">{{ work.sketch_image.name|slice:"-60:" }}</span>
+                            <div class="actions">
+                                <a class="pill ghost" href="{{ work.sketch_image.url }}" download>Download</a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="placeholder full">Sketches will appear here after you generate them.</div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <form method="post" enctype="multipart/form-data" class="dash-form">
+                {% csrf_token %}
+                <input type="hidden" name="tab" value="upload">
+                <label for="id_image" class="pill ghost">Upload Image</label>
+                {{ form.image }}
+                <div class="form-field">
+                    <label for="{{ form.sketch_style.id_for_label }}">Sketch style</label>
+                    {{ form.sketch_style }}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.sketch_depth.id_for_label }}">Sketch depth</label>
+                    {{ form.sketch_depth }}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.output_size.id_for_label }}">Output size</label>
+                    {{ form.output_size }}
+                </div>
+                <button type="submit" class="pill primary">Generate Sketch</button>
+            </form>
+
+            <div class="dash-panels">
+                <div class="panel">
+                    <p class="panel-title">Generated Sketch</p>
+                    {% if result_url %}
+                        <img src="{{ result_url }}" alt="Generated sketch">
+                    {% else %}
+                        <div class="placeholder">Ready when you generate</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="recent">
+                <div class="recent-head">
+                    <h4>Recent Works</h4>
+                    <p>Your latest sketches are saved for quick access.</p>
+                </div>
+                <div class="recent-grid">
+                    {% for work in recent %}
+                        <div class="recent-card">
+                            <div class="thumbs thumbs-single">
+                                <img src="{{ work.sketch_image.url }}" alt="Sketch">
+                            </div>
+                            <div class="meta">
+                                <span>{{ work.created_at|date:"M d, Y" }}</span>
+                                <a class="pill ghost" href="{{ work.sketch_image.url }}" download>Download</a>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="placeholder full">Sketches will appear here after you generate them.</div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

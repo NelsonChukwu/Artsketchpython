@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section-page">
+    <div class="section-header">
+        <p class="eyebrow">Hybrid Artistic Engine</p>
+        <h1>{{ section.title }}</h1>
+        <p class="lede">{{ section.lead }}</p>
+    </div>
+    <div class="pill-grid">
+        {% for item in section.items %}
+        <div class="pill-card">{{ item }}</div>
+        {% empty %}
+        <div class="pill-card">Explore the platform and begin sketching.</div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'home' %}" class="ghost-btn">Back to Home</a>
+</section>
+{% endblock %}
