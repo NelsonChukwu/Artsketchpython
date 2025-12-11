@@ -229,9 +229,14 @@ def section(request, slug):
             "items": ["My Projects", "Version History", "Autosaved Drafts", "Shared Collaborations"],
         },
         "community": {
-            "title": "Community",
-            "lead": "Explore gallery pieces, trending looks, and participate in creative challenges.",
-            "items": ["Explore Gallery", "Trending Styles", "Artist Profiles", "Contest / Challenges"],
+            "title": "Gallery",
+            "lead": "Share illusions and AR-ready pieces—upload progress or finished work as photos or videos.",
+            "items": [
+                "Progress work (photo or video uploads)",
+                "Finished work (photo or video uploads)",
+                "Illusion showcase",
+                "Augmented Reality (AR) experiences",
+            ],
         },
         "account": {
             "title": "Account",

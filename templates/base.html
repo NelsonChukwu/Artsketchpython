@@ -23,7 +23,7 @@
                 <a href="{% url 'editor' %}">Editor</a>
                 <a href="{% url 'ai-enhancement' %}">AI Enhancement</a>
                 <a href="{% url 'projects' %}">Projects</a>
-                <a href="{% url 'community' %}">Community</a>
+                <a href="{% url 'community' %}">Gallery</a>
             </nav>
             <div class="nav-actions">
                 {% if request.user.is_authenticated and request.resolver_match.url_name != 'landing' %}
@@ -53,7 +53,7 @@
             <div class="footer-actions">
                 <span>Precision sketching</span>
                 <span>AI refinement</span>
-                <span>Community gallery</span>
+                <span>AR illusion gallery</span>
             </div>
         </footer>
     </div>
